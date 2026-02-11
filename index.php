@@ -35,7 +35,9 @@
         }
     </script>
 <style>
-        body { font-family: 'Manrope', sans-serif; }
+       
+        /* Estilos de la pagina principal*/
+       body { font-family: 'Manrope', sans-serif; }
         .glass-effect {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -44,10 +46,58 @@
         .gold-gradient {
             background: linear-gradient(135deg, #d4af37 0%, #f1d592 50%, #d4af37 100%);
         }
+       
+        /* 3D Animacion efecto */
+        .perspective-container { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateZ(20px); }
+            50% { transform: translateY(-15px) translateZ(20px); }
+        }
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px) translateZ(40px); }
+            50% { transform: translateY(-10px) translateZ(40px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite 1s; }
+        
+        .hero-glow {
+            background: radial-gradient(circle at center, rgba(17, 212, 82, 0.15) 0%, transparent 70%);
+        }
+
+        /* Animación de brillo para botón */
+        @keyframes shine-move {
+            0% { left: -100%; opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { left: 200%; opacity: 0; }
+        }
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-25deg); animation: shine-move 2s infinite; pointer-events: none;
+        }
+
+        /* Animación de fondo Hero */
+        @keyframes move-blob-1 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+        @keyframes move-blob-2 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-50px, 30px) scale(1.1); }
+            66% { transform: translate(30px, -30px) scale(0.9); }
+        }
+        .animate-blob-1 { animation: move-blob-1 15s infinite ease-in-out; }
+        .animate-blob-2 { animation: move-blob-2 18s infinite ease-in-out; }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200">
-<!-- Navigation -->
+
+<!-- Header navigation -->
 <nav class="fixed w-full z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
 <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 <div class="flex items-center space-x-2">
@@ -66,37 +116,74 @@
 </div>
 </div>
 </nav>
+
 <!-- Hero Section -->
-<header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-<div class="absolute inset-0 z-0">
-<img alt="Hemp Plantation" class="w-full h-full object-cover" data-alt="Lush green industrial hemp plantation rows under sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Yd_NuSvGppOieNC58yKGWwzIrxAcSZu0lV7GwfADhAadd1xnAdZH5TanNgvawo_xkfgSarU-lEHJnQmSqQFj7eugIAH4PSZGkRXDX92R26uZo0UdsfIoFgoR20Tldta7_2ARr48yPhCgo_6o1bMfe2TZKjdU8x6UBvwsu_WzrxH11NVsxjHlbX0OK1QBMqEvBdlciOPxAF7RFhqQm8nSvo9L87R6NnSqMAPorCgMg_lfC8ofFI2wwM_Wvf_nV56Nv-26rfqiOfs"/>
-<div class="absolute inset-0 bg-gradient-to-r from-forest-green/90 via-forest-green/60 to-transparent"></div>
-</div>
-<div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
-<div class="max-w-3xl">
-<div class="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary px-4 py-2 rounded-full mb-6">
-<span class="material-icons text-sm">verified_user</span>
-<span class="text-xs font-bold uppercase tracking-widest">Inversión de Alto Impacto</span>
-</div>
-<h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-                    Invertir en el futuro verde con <span class="text-primary">Tasty Fruits SRL</span>
-</h1>
-<p class="text-xl text-slate-300 mb-10 max-w-xl leading-relaxed">
+<header class="relative min-h-screen w-full flex items-center overflow-hidden bg-[#05100a]">
+    
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] bg-primary/10 rounded-full blur-[120px] animate-blob-1"></div>
+        <div class="absolute bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-accent-gold/5 rounded-full blur-[100px] animate-blob-2"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center pt-20 lg:pt-0">
+        
+    <!-- Contenido de la pagina principal -->
+        <div class="max-w-2xl relative z-20">
+            <div class="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/20 text-primary px-4 py-2 rounded-full mb-6">
+                <span class="material-icons text-sm">verified_user</span>
+                <span class="text-xs font-bold uppercase tracking-widest">Inversión de Alto Impacto</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+                    Invertir en el futuro verde con <span class="text-primary">Tasty Fruits </span>
+            </h1>
+            <p class="text-xl text-slate-300 mb-10 max-w-xl leading-relaxed">
                     Lideramos la revolución del cáñamo industrial con tecnología de vanguardia y un compromiso inquebrantable con la rentabilidad sostenible.
-                </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="gold-gradient text-forest-green font-extrabold px-8 py-4 rounded-xl shadow-xl hover:shadow-accent-gold/20 transition-all flex items-center justify-center gap-2">
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="btn-shine gold-gradient text-forest-green font-extrabold px-8 py-4 rounded-xl shadow-xl hover:shadow-accent-gold/20 transition-all flex items-center justify-center gap-2">
                         DESCUBRE CÓMO INVERTIR
                         <span class="material-icons">arrow_forward</span>
-</button>
-<button class="glass-effect text-white font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all">
+                </button>
+                <button class="glass-effect text-white font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all">
                         Descargar Dossier
-                    </button>
-</div>
-</div>
-</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3D Planta principal  -->
+        <div class="hidden lg:flex relative h-[600px] w-full items-center justify-center perspective-container" id="hero-visual">
+            <!-- 3D Contenedor de la planta -->
+            <div class="relative w-[380px] h-[500px] preserve-3d transition-transform duration-100 ease-out cursor-pointer" id="tilt-card">
+                
+                <div class="absolute inset-0 -z-10 border border-white/10 rounded-[3rem] transform translate-z-[-50px] scale-110"></div>
+                
+                <!-- Imagen de la planta -->
+                <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-sm rounded-[2.5rem] border border-white/10 shadow-2xl overflow-hidden">
+                    <img src="Copilot_20260210_184116.png" 
+                         class="w-full h-full object-cover transform scale-110 hover:scale-125 transition-transform duration-700" alt="Planta de Cáñamo 3D">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#05100a]/80 via-transparent to-transparent"></div>
+                </div>
+
+                
+                <div class="absolute -right-8 top-20 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl animate-float preserve-3d">
+                    <span class="material-icons text-primary text-4xl drop-shadow-lg">eco</span>
+                </div>
+
+                <div class="absolute -left-12 bottom-32 bg-background-dark/80 backdrop-blur-md border border-primary/30 px-6 py-4 rounded-2xl shadow-2xl animate-float-delayed preserve-3d flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                        <span class="material-icons text-white text-sm">trending_up</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase font-bold">Rentabilidad</p>
+                        <p class="text-xl font-black text-white">+300%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<!-- Market Opportunity -->
+
+<!-- Mercado-->
 <section class="py-24 bg-white dark:bg-background-dark">
 <div class="max-w-7xl mx-auto px-6">
 <div class="text-center mb-16">
@@ -104,8 +191,9 @@
 <h3 class="text-4xl font-extrabold text-forest-green dark:text-white">Una Oportunidad Multi-Industria</h3>
 </div>
 <div class="grid md:grid-cols-3 gap-12">
+
 <!-- Pharma -->
-<div class="group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="js-tilt-card group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all duration-200 ease-out hover:shadow-2xl hover:shadow-primary/5">
 <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
 <span class="material-icons text-primary text-3xl">medical_services</span>
 </div>
@@ -114,8 +202,9 @@
                         Extracción de cannabinoides de alta pureza para aplicaciones terapéuticas y bienestar. Un mercado en crecimiento exponencial.
                     </p>
 </div>
-<!-- Textile -->
-<div class="group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/5">
+
+<!-- Textil -->
+<div class="js-tilt-card group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all duration-200 ease-out hover:shadow-2xl hover:shadow-primary/5">
 <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
 <span class="material-icons text-primary text-3xl">checkroom</span>
 </div>
@@ -124,8 +213,8 @@
                         Fibras de cáñamo premium para la industria textil, ofreciendo durabilidad y una huella hídrica mínima frente al algodón tradicional.
                     </p>
 </div>
-<!-- Construction -->
-<div class="group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<!-- Construccion -->
+<div class="js-tilt-card group p-8 rounded-2xl bg-background-light dark:bg-forest-green/20 border border-slate-100 dark:border-white/5 hover:border-primary/30 transition-all duration-200 ease-out hover:shadow-2xl hover:shadow-primary/5">
 <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
 <span class="material-icons text-primary text-3xl">foundation</span>
 </div>
@@ -136,8 +225,29 @@
 </div>
 </div>
 </div>
+
+<!-- Proyeccion de trabajo  -->
+<div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-slate-100 dark:border-white/5 pt-16">
+    <div class="text-center">
+        <p class="text-4xl font-black text-primary mb-2">150+</p>
+        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Hectáreas</p>
+    </div>
+    <div class="text-center">
+        <p class="text-4xl font-black text-primary mb-2">12k</p>
+        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Toneladas CO2</p>
+    </div>
+    <div class="text-center">
+        <p class="text-4xl font-black text-primary mb-2">24/7</p>
+        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Monitoreo</p>
+    </div>
+    <div class="text-center">
+        <p class="text-4xl font-black text-primary mb-2">100%</p>
+        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Legalidad</p>
+    </div>
+</div>
+
 </section>
-<!-- Financial Data -->
+<!-- Datos Financieros -->
 <section class="py-24 bg-background-light dark:bg-background-dark/50">
 <div class="max-w-7xl mx-auto px-6">
 <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -170,7 +280,7 @@
 <div class="flex items-center"><span class="w-3 h-3 bg-slate-300 rounded-full mr-2"></span> Conservador</div>
 </div>
 </div>
-<!-- Mock Chart -->
+<!-- Estadistica -->
 <div class="h-64 flex items-end justify-between gap-2">
 <div class="w-1/6 bg-slate-100 dark:bg-white/5 rounded-t-lg h-[20%] relative group">
 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Q1</div>
@@ -191,7 +301,7 @@
 </div>
 </div>
 </section>
-<!-- Competitive Advantages -->
+<!-- Sector Vetajas Competitivas -->
 <section class="py-24 bg-white dark:bg-background-dark">
 <div class="max-w-7xl mx-auto px-6">
 <div class="text-center mb-16">
@@ -222,12 +332,12 @@
 </div>
 </div>
 </section>
-<!-- ESG / Impact Section -->
+<!-- Sector Impacto positivo -->
 <section class="py-24 bg-primary/10 dark:bg-primary/5">
 <div class="max-w-7xl mx-auto px-6">
 <div class="bg-forest-green rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
 <div class="lg:w-1/2 relative h-80 lg:h-auto">
-<img alt="Eco Impact" class="w-full h-full object-cover" data-alt="Close up of a vibrant green hemp leaf in sunshine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi4C2yNCIU_FTqBQFwCPy_7EIp5Ksn2FSgWagU9fEK2CVolyLJqqLkp0xAnEEzs8709jBQlYOVDUNNSreD5Rg9R760W8ZyeRyu1_mfZD6fuADsL0pxeqRVLOV-xpd4vl3z2OKSWKU946TU9k-AK0HBZF1mCUk8CaJ4LH0nTxZ3QZ0H0VjZ-NPekUbyRqPbF3EvsUAbCatKq4kKG8d_IAnn6KVyey_Q6nUdJ_a1hAUDFz-KGlyywndV5zLOnkE0oJ2Dj2FcVgq_Q5Q"/>
+<img alt="Eco Impact" class="w-full h-full object-cover" data-alt="Close up of a vibrant green hemp leaf in sunshine" src="Planeta.png"/>
 </div>
 <div class="lg:w-1/2 p-12 lg:p-20">
 <h2 class="text-sm font-bold text-primary uppercase tracking-[0.2em] mb-4">Nuestro Impacto ESG</h2>
@@ -265,7 +375,7 @@
 </div>
 </div>
 </section>
-<!-- Final CTA -->
+<!-- Unete a la inversion -->
 <section class="py-24 bg-white dark:bg-background-dark overflow-hidden relative">
 <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
 <h2 class="text-5xl md:text-6xl font-extrabold text-forest-green dark:text-white mb-8">Únete a nuestra visión</h2>
@@ -281,10 +391,10 @@
                 </button>
 </div>
 </div>
-<!-- Decorative blobs -->
 <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 <div class="absolute -top-24 -right-24 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"></div>
 </section>
+
 <!-- Footer -->
 <footer class="bg-forest-green py-12 border-t border-white/5">
 <div class="max-w-7xl mx-auto px-6">
@@ -301,9 +411,51 @@
 <a class="hover:text-primary" href="#">Legal</a>
 </div>
 <div class="text-slate-500 text-sm font-medium">
-                    © 2024 Tasty Fruits SRL. Todos los derechos reservados.
+                    © 2026 Tasty Fruits SRL. Todos los derechos reservados.
                 </div>
 </div>
 </div>
 </footer>
+<script>
+    // 3D efecto de inclinación para la planta en el hero
+    const heroContainer = document.getElementById('hero-visual');
+    const tiltCard = document.getElementById('tilt-card');
+
+    if (heroContainer && tiltCard) {
+        heroContainer.addEventListener('mousemove', (e) => {
+            const rect = heroContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+           
+            const rotateY = (x / rect.width) * 30; 
+            const rotateX = (y / rect.height) * -30;
+
+            tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        heroContainer.addEventListener('mouseleave', () => {
+            tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    }
+
+    // Efecto Tilt para las tarjetas de mercado
+    const cards = document.querySelectorAll('.js-tilt-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const rotateY = (x / rect.width) * 10; // Rotación sutil
+            const rotateX = (y / rect.height) * -10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+    });
+</script>
 </body></html>
