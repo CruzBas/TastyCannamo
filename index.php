@@ -125,10 +125,10 @@
         <div class="absolute bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-accent-gold/5 rounded-full blur-[100px] animate-blob-2"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center pt-20 lg:pt-0">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row gap-12 items-center pt-24 pb-12 lg:py-0">
         
     <!-- Contenido de la pagina principal -->
-        <div class="max-w-2xl relative z-20">
+        <div class="w-full lg:w-1/2 max-w-2xl relative z-20 text-center lg:text-left mx-auto lg:mx-0">
             <div class="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-md border border-primary/20 text-primary px-4 py-2 rounded-full mb-6">
                 <span class="material-icons text-sm">verified_user</span>
                 <span class="text-xs font-bold uppercase tracking-widest">Inversión de Alto Impacto</span>
@@ -139,7 +139,7 @@
             <p class="text-xl text-slate-300 mb-10 max-w-xl leading-relaxed">
                     Lideramos la revolución del cáñamo industrial con tecnología de vanguardia y un compromiso inquebrantable con la rentabilidad sostenible.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button class="btn-shine gold-gradient text-forest-green font-extrabold px-8 py-4 rounded-xl shadow-xl hover:shadow-accent-gold/20 transition-all flex items-center justify-center gap-2">
                         DESCUBRE CÓMO INVERTIR
                         <span class="material-icons">arrow_forward</span>
@@ -151,9 +151,9 @@
         </div>
 
         <!-- 3D Planta principal  -->
-        <div class="hidden lg:flex relative h-[600px] w-full items-center justify-center perspective-container" id="hero-visual">
+        <div class="relative h-[450px] lg:h-[600px] w-full lg:w-1/2 flex items-center justify-center perspective-container mt-8 lg:mt-0" id="hero-visual">
             <!-- 3D Contenedor de la planta -->
-            <div class="relative w-[380px] h-[500px] preserve-3d transition-transform duration-100 ease-out cursor-pointer" id="tilt-card">
+            <div class="relative w-[300px] h-[400px] lg:w-[380px] lg:h-[500px] preserve-3d transition-transform duration-100 ease-out cursor-pointer" id="tilt-card">
                 
                 <div class="absolute inset-0 -z-10 border border-white/10 rounded-[3rem] transform translate-z-[-50px] scale-110"></div>
                 
